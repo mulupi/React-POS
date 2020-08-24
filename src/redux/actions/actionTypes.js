@@ -1,0 +1,5 @@
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const ASSIGN_ROLE = "ASSIGN_ROLE";
+export const GET_USER_ERROR = "GET_USER_ERROR";
+export const CLEAR_LOGIN_ERROR="CLEAR_LOGIN_ERROR";
