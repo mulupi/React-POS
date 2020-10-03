@@ -1,5 +1,14 @@
 import React from 'react';
 
+const Users = React.lazy(() => import('./components/users/Users'));
+const Suppliers = React.lazy(() => import('./components/suppliers/Suppliers'));
+const Brands = React.lazy(() => import('./components/bikes/Brands'));
+const Body = React.lazy(() => import('./components/bikes/Body_type'));
+const Models = React.lazy(() => import('./components/bikes/Models'));
+const Categories = React.lazy(() => import('./components/products/ProductCategory'));
+const Subcategories = React.lazy(() => import('./components/products/Subcategory'));
+const Addproduct = React.lazy(() => import('./components/products/Addproducts'));
+
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 
@@ -28,19 +37,27 @@ const Charts = React.lazy(() => import('./views/charts/Charts'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'));
 const Flags = React.lazy(() => import('./views/icons/flags/Flags'));
-const Brands = React.lazy(() => import('./views/icons/brands/Brands'));
+//const Brands = React.lazy(() => import('./views/icons/brands/Brands'));
 const Alerts = React.lazy(() => import('./views/notifications/alerts/Alerts'));
 const Badges = React.lazy(() => import('./views/notifications/badges/Badges'));
 const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'));
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
-const Users = React.lazy(() => import('./views/users/Users'));
-const User = React.lazy(() => import('./views/users/User'));
+
 
 const routes = [
   { path: '/', exact: true, name: 'Home', component: Dashboard },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path:'/suppliers', name:'Suppliers', component:Suppliers},
+  { path: '/users', exact: true,  name: 'Users', component: Users },
+  { path: '/brands', exact: true,  name: 'Brands', component: Brands },
+  { path: '/body',  exact: true,  name:'Body',component:Body},
+  { path: '/models',  exact: true,  name:'Models',component:Models},
+  { path: '/categories',  exact: true,  name:'Categories',component:Categories},
+  { path: '/subcategory',  exact: true,  name:'Sub-Categories',component:Subcategories},
+  { path: '/addproduct',  exact: true,  name:'Add Product',component:Addproduct},
+
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -77,8 +94,7 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
-  { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User }
+  
 ];
 
 export default routes;

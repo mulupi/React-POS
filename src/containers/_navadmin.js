@@ -1,30 +1,129 @@
 export default [
+  
   {
     _tag: 'CSidebarNavItem',
-    name: 'Dashboard',
+    name: 'Dashbodard',
     to: '/dashboard',
-    icon: 'cil-speedometer',
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    }
+    icon: 'cil-home'
+  },  
+  {
+    _tag: 'CSidebarNavTitle',
+    _children: ['Products']
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Add Products',
+    to: '/addproduct',
+    icon: 'cil-drop',
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Product Categories',
+    route: '/buttons',
+    icon: 'cil-cursor',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Add Category',
+        to: '/categories',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Add Subcategory',
+        to: '/subcategory',
+      }
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Bikes',
+    route: '/buttons',
+    icon: 'cil-cursor',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Add Brand',
+        to: '/brands',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Add Body',
+        to: '/body',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Add Model ',
+        to: '/models',
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Modify Product',
+    to: '/theme/typography',
+    icon: 'cil-pencil',
   },
   {
     _tag: 'CSidebarNavTitle',
-    _children: ['Theme']
+    _children: ['Suppliers']
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Colors',
+    name: 'Add Supplier',
+    to: '/suppliers',
+    icon: 'cil-drop',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Modify Suppliers',
+    to: '/theme/colors',
+    icon: 'cil-drop',
+  },
+  {
+    _tag: 'CSidebarNavTitle',
+    _children: ['Supplies']
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Add Supplies',
     to: '/theme/colors',
     icon: 'cil-drop',
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Typography',
-    to: '/theme/typography',
-    icon: 'cil-pencil',
+    name: 'Modify Supplies',
+    to: '/theme/colors',
+    icon: 'cil-drop',
   },
+  {
+    _tag: 'CSidebarNavTitle',
+    _children: ['Reports']
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Suppliers',
+    to: '/theme/colors',
+    icon: 'cil-drop',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Goods in Store',
+    to: '/theme/colors',
+    icon: 'cil-drop',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Goods in Shelves',
+    to: '/theme/colors',
+    icon: 'cil-drop',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Sales',
+    to: '/theme/colors',
+    icon: 'cil-drop',
+  }
+  /*
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Components']
@@ -304,5 +403,6 @@ export default [
     _tag: 'CSidebarNavDivider',
     className: 'm-2'
   }
+  */
 ]
 

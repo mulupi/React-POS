@@ -5,15 +5,16 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
 function saveTolocalStorage(state) {
-    try {
+    try {      
       const serializedState = JSON.stringify(state);
       localStorage.setItem("state", serializedState);
     } catch (e) {
+      
     }
   }
   
 function loadFromlocalStorage() {
-    try {
+    try {      
       const serializedState = localStorage.getItem("state");
       if (serializedState === null) return undefined;
       return JSON.parse(serializedState);

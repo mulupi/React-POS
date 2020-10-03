@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   CCreateElement,
   CSidebar,
@@ -16,12 +16,13 @@ import CIcon from '@coreui/icons-react'
 // sidebar nav config
 import manager from './_navadmin'
 import attendant from './_navattendant'
+import jwt_decode from "jwt-decode";
 
 const TheSidebar = () => {
-  const dispatch = useDispatch()
-  //const show = useSelector(state => state.auth.sidebarShow)
-  const show = true
-  const selected_role = useSelector(state => state.auth.role)
+  const token = useSelector(state => state.auth.access_token)
+  const show = useSelector(state => state.dashboard.sidebarShow)
+  const decoded = jwt_decode(token)
+  const selected_role=decoded["role"]
   const menu_selector=(selected_role)=>{
     if (selected_role==="Attendant"){
       return attendant
@@ -39,7 +40,7 @@ const TheSidebar = () => {
       <CSidebarBrand className="d-md-down-none" to="/">
         <CIcon
           className="c-sidebar-brand-full"
-          name="logo-negative"
+          name="cil-home"
           height={35}
         />
         <CIcon

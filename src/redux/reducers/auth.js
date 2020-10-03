@@ -3,18 +3,16 @@ import {
     ASSIGN_ROLE,
     LOGIN_FAIL,
     GET_USER_ERROR,
-    CLEAR_LOGIN_ERROR
+    CLEAR_LOGIN_ERROR,
+    LOGOUT
 } from '../actions/actionTypes'
+
 const initialState = {
     access_token: null,
     refresh_token: null,
     isAuthenticated:false,
-    id_number:null,
-    user_name:null,    
-    role: null,
-    login_error:null,
-    show:false
   };
+const get_initialState=()=>{return initialState}
   
 export default function authReducer(state = initialState, action){
     switch(action.type)
@@ -27,25 +25,24 @@ export default function authReducer(state = initialState, action){
                 isAuthenticated: true
             };
         case ASSIGN_ROLE:
-            return {
-                ...state,
-                role: action.payload.Role,
-                user_name:action.payload.user_name
-            };
+            return state
         case LOGIN_FAIL:
             return{
                 ...state,
+                ...get_initialState(),
                 login_error:true
             }          
         case GET_USER_ERROR:
             localStorage.clear()
+            return get_initialState()
+        case LOGOUT:
+            localStorage.clear()
+            return get_initialState()
         case CLEAR_LOGIN_ERROR:
             return{
                 ...state,
                 login_error:false
             } 
-
-            
         default:
             return state;
     }

@@ -3,9 +3,14 @@ import {
     LOGIN_SUCCESS,
     ASSIGN_ROLE,
     GET_USER_ERROR,
-    CLEAR_LOGIN_ERROR
+    CLEAR_LOGIN_ERROR,
+    LOGOUT
     } from './actionTypes'
 import axios from "axios";
+import{
+  LOGINURL,
+  GETUSERURL
+} from '../../Constants';
 export const loginUser =  (data) => (dispatch) => {
     // Headers
     const config = {
@@ -14,7 +19,7 @@ export const loginUser =  (data) => (dispatch) => {
       },
     };
       axios
-        .post("http://localhost:8000/users/api/token/", data, config)
+        .post(LOGINURL, data, config)
         .then((res) =>{
           dispatch({
             type: LOGIN_SUCCESS,
@@ -28,6 +33,13 @@ export const loginUser =  (data) => (dispatch) => {
           });
         });
   };
+export const logout=(dispatch)=>{
+  dispatch(
+    {
+      type:LOGOUT
+    }
+  )
+}
 
 export const getUser = (access_token) => (dispatch) => {
   // Headers
@@ -38,7 +50,7 @@ export const getUser = (access_token) => (dispatch) => {
     },
   };
     axios
-      .get("http://localhost:8000/users/get_user/", config)
+      .get(GETUSERURL, config)
       .then((res) =>{
         dispatch({
           type: ASSIGN_ROLE,

@@ -1,0 +1,13 @@
+export const URL="http://localhost:8000";
+export const LOGINURL=URL+"/users/api/token/";
+export const GETUSERURL=URL+"/users/get_user/";
+export const CREATEMANAGER=URL+"/users/createmanager/";
+export const CREATEATTENDANT=URL+"/users/createattendant/";
+export const GETALLUSERSURL=URL+"/users/get_all_user/";
+export const CREATESUPPLIER=URL+"/parts/suppliers/";
+export const BRANDS=URL+"/parts/brand/"
+export const BODY=URL+"/parts/body/"
+export const MODELS=URL+"/parts/models/"
+export const CATEGORIES=URL+"/parts/partscategories/"
+export const SUBCATEGORIES=URL+"/parts/subcat/"
+export const PRODUCTS=URL+"/parts/products/"

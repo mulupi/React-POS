@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   CHeader,
@@ -8,10 +8,13 @@ import {
   CHeaderNavItem,
   CHeaderNavLink,
   CSubheader,
-  CBreadcrumbRouter,
-  CLink
+  CBreadcrumbRouter
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+
+import {
+  sidebar
+    } from '../redux/actions/dashboard'
 
 // routes config
 import routes from '../routes'
@@ -19,22 +22,31 @@ import routes from '../routes'
 import { 
   TheHeaderDropdown,
   TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
+  TheHeaderDropdownNotif
 }  from './index'
+import jwt_decode from "jwt-decode";
 
 const TheHeader = () => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector(state => state.sidebarShow)
+  const sidebarShow = useSelector(state => state.dashboard.sidebarShow)
+  const token = useSelector(state => state.auth.access_token)
+  const selected_role = jwt_decode(token)["role"]
+
+  const showRegUser=()=>(
+    selected_role==="Manager" &&
+    <CHeaderNavItem  className="px-3">
+    <CHeaderNavLink to="/users">Users</CHeaderNavLink>
+  </CHeaderNavItem>
+  )
 
   const toggleSidebar = () => {
-    const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
+    const val = [true, 'responsive'].includes(sidebarShow) ? false : true
+    dispatch(sidebar(val))
   }
 
   const toggleSidebarMobile = () => {
-    const val = [false, 'responsive'].includes(sidebarShow) ? true : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
+    const val = [false, 'responsive'].includes(sidebarShow) ? true : false
+    dispatch(sidebar(val))
   }
 
   return (
@@ -57,17 +69,14 @@ const TheHeader = () => {
         <CHeaderNavItem className="px-3" >
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
-        <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/users">Users</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink>Settings</CHeaderNavLink>
-        </CHeaderNavItem>
+
+        {showRegUser()}
+
+        
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
         <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/>
         <TheHeaderDropdownMssg/>
         <TheHeaderDropdown/>
       </CHeaderNav>
@@ -77,21 +86,6 @@ const TheHeader = () => {
           className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
           routes={routes} 
         />
-          <div className="d-md-down-none mfe-2 c-subheader-nav">
-            <CLink className="c-subheader-nav-link"href="#">
-              <CIcon name="cil-speech" alt="Settings" />
-            </CLink>
-            <CLink 
-              className="c-subheader-nav-link" 
-              aria-current="page" 
-              to="/dashboard"
-            >
-              <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
-            </CLink>
-            <CLink className="c-subheader-nav-link" href="#">
-              <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
-            </CLink>
-          </div>
       </CSubheader>
     </CHeader>
   )
