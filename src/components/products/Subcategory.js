@@ -32,10 +32,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import jwt_decode from "jwt-decode";
 
-//material ui
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -47,7 +43,6 @@ const SubCategory = () => {
   const SubCategoriesData = useSelector(state => state.products.product_subcategory_data)
   const subcategoriesRegistrationSuccess=useSelector(state=>state.products.product_subcategory_registration_success)
   const createSubCategoryError = useSelector(state => state.products.product_subcategory_registration_error)
-  const CategoriesData = useSelector(state => state.products.product_categories_data)
 
   const history = useHistory()
   const queryPage = useLocation().search.match(/page=([0-9]+)/, '')
@@ -55,16 +50,13 @@ const SubCategory = () => {
   const [page, setPage] = useState(currentPage)
   const [open, setOpen] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [category, setCategoryname]=useState(0)
-  
 
   const [sub_category_name, setSub_category_name] = useState("");
   const dispatch = useDispatch();
   const createSubCategory= async (e)=>{
     e.preventDefault()
     const subcategory={
-      "sub_category_name":sub_category_name,
-      "category":category
+      "sub_category_name":sub_category_name
     }
       if (jwt_decode(token)["role"]==="Manager"){
       await dispatch(CreateSubCategory(token,subcategory))
@@ -155,28 +147,7 @@ const SubCategory = () => {
                 <CInput id="sub_category_name" value={sub_category_name} onChange={(e)=>{setSub_category_name(e.target.value)}} type="text" placeholder="Enter name of sub-category" />
                 </CTooltip>
                 </CCol>
-              </CFormGroup>
-
-              <CFormGroup row>
-                <CLabel htmlFor="Category" col md={4}>Category</CLabel>
-                <CCol xs="12" md="8">
-                <CTooltip
-                    content={`Select a Category`}
-                    placement={'bottom'}
-                  >
-                <Autocomplete
-                    id="Category"
-                    options={CategoriesData}
-                    getOptionLabel={(option) => option.category_name}
-                    onChange={(event, newValue) => {
-                      setCategoryname(newValue.id);
-                    }}
-                    style={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Category" variant="outlined" />}
-                  />                
-                </CTooltip>
-                </CCol>
-              </CFormGroup>              
+              </CFormGroup>        
               
                 <CFormGroup row>
                 <CCol xs="4">

@@ -4,6 +4,7 @@ import {
     ASSIGN_ROLE,
     GET_USER_ERROR,
     CLEAR_LOGIN_ERROR,
+    CLEAR_CART,
     LOGOUT
     } from './actionTypes'
 import axios from "axios";
@@ -39,6 +40,12 @@ export const logout=(dispatch)=>{
       type:LOGOUT
     }
   )
+  dispatch(
+    {
+      type:CLEAR_CART
+    }
+  )
+  
 }
 
 export const getUser = (access_token) => (dispatch) => {

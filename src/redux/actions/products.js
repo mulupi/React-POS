@@ -81,7 +81,6 @@ export const CreateSubCategory =  (access_token,data) => (dispatch) => {
     // Headers
     const formData = new FormData();
     formData.append('title',data["sub_category_name"])
-    formData.append('category',data["sub_category_name"])
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
@@ -137,10 +136,15 @@ export const CreateProduct =  (access_token,data) => (dispatch) => {
     const formData = new FormData();
     formData.append('product_code',data["product_code"])
     formData.append('parts_category',data["category"])
-    formData.append('bike_model',data["models"])
+    data["models"].map((vals)=>{
+      formData.append('bike_model',vals)
+    })
+    
     formData.append('manufacturer',data["manufacturer"])
     formData.append('product_name',data["product_name"])
     formData.append('description',data["description"])    
+    formData.append('image',data["image"])
+    formData.append('subcategory',data["subcategory"])
     const config = {
       headers: {
         'content-type': 'multipart/form-data',

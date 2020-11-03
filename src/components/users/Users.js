@@ -34,6 +34,7 @@ import {
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import jwt_decode from "jwt-decode";
+import { DataGrid } from '@material-ui/data-grid';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

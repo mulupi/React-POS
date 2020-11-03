@@ -1,70 +1,112 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   CBadge,
   CDropdown,
-  CDropdownItem,
-  CDropdownMenu,
   CDropdownToggle,
-  CProgress
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import { DataGrid } from '@material-ui/data-grid';
+import {
+  connect,
+  useSelector
+} from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
 
-const TheHeaderDropdownNotif = () => {
-  const itemsCount = 5
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: 600,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
+
+const Cart = props => {
+  const classes = useStyles();
+  // getModalStyle is not a pure function, we roll the style only on the first render
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+  // const items = useSelector(state => state.cart.items)
+  const { items } = props
+  const [number, setNumber] = React.useState(0)
+
+  useEffect(() => {
+    console.log(items.length)
+    setNumber(items.length)
+  }, [items])
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">Cart</h2>
+      <div style={{ height: 500, width: '100%' }}>
+        <DataGrid
+          columns={
+            [{ field: 'product_name', width: 150 },
+            { field: 'product_description', width: 150 },
+            { field: 'Price_per_unit', width: 100, type: 'number' },
+            ]
+          }
+          rows={items}
+        />
+      </div>
+    </div>
+  );
+
+
+
   return (
-    <CDropdown
-      inNav
-      className="c-header-nav-item mx-2"
-    >
-      <CDropdownToggle className="c-header-nav-link" caret={false}>
-        <CIcon name="cil-bell"/>
-        <CBadge shape="pill" color="danger">{itemsCount}</CBadge>
-      </CDropdownToggle>
-      <CDropdownMenu  placement="bottom-end" className="pt-0">
-        <CDropdownItem
-          header
-          tag="div"
-          className="text-center"
-          color="light"
-        >
-          <strong>You have {itemsCount} notifications</strong>
-        </CDropdownItem>
-        <CDropdownItem><CIcon name="cil-user-follow" className="mr-2 text-success" /> New user registered</CDropdownItem>
-        <CDropdownItem><CIcon name="cil-user-unfollow" className="mr-2 text-danger" /> User deleted</CDropdownItem>
-        <CDropdownItem><CIcon name="cil-chart-pie" className="mr-2 text-info" /> Sales report is ready</CDropdownItem>
-        <CDropdownItem><CIcon name="cil-basket" className="mr-2 text-primary" /> New client</CDropdownItem>
-        <CDropdownItem><CIcon name="cil-speedometer" className="mr-2 text-warning" /> Server overloaded</CDropdownItem>
-        <CDropdownItem
-          header
-          tag="div"
-          color="light"
-        >
-          <strong>Server</strong>
-        </CDropdownItem>
-        <CDropdownItem className="d-block">
-          <div className="text-uppercase mb-1">
-            <small><b>CPU Usage</b></small>
-          </div>
-          <CProgress size="xs" color="info" value={25} />
-          <small className="text-muted">348 Processes. 1/4 Cores.</small>
-        </CDropdownItem>
-        <CDropdownItem className="d-block">
-          <div className="text-uppercase mb-1">
-            <small><b>Memory Usage</b></small>
-          </div>
-          <CProgress size="xs" color="warning" value={70} />
-          <small className="text-muted">11444GB/16384MB</small>
-        </CDropdownItem>
-        <CDropdownItem className="d-block">
-          <div className="text-uppercase mb-1">
-            <small><b>SSD 1 Usage</b></small>
-          </div>
-          <CProgress size="xs" color="danger" value={90} />
-          <small className="text-muted">243GB/256GB</small>
-        </CDropdownItem>
-      </CDropdownMenu>
-    </CDropdown>
+    <div>
+      <CDropdown
+        inNav
+        className="c-header-nav-item mx-2"
+      >
+        <CDropdownToggle className="c-header-nav-link" caret={false} onClick={handleOpen}>
+          <FontAwesomeIcon icon={faShoppingCart} />
+          <CBadge shape="pill" color="danger">{number}</CBadge>
+        </CDropdownToggle>
+
+      </CDropdown>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {body}
+      </Modal>
+    </div>
   )
 }
 
-export default TheHeaderDropdownNotif
+const getItems = state => state.cart.items
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    items: getItems(state)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(Cart)

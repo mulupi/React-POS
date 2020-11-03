@@ -8,6 +8,11 @@ const Models = React.lazy(() => import('./components/bikes/Models'));
 const Categories = React.lazy(() => import('./components/products/ProductCategory'));
 const Subcategories = React.lazy(() => import('./components/products/Subcategory'));
 const Addproduct = React.lazy(() => import('./components/products/Addproducts'));
+const Supplies = React.lazy(() => import('./components/supplies/Supplies'));
+const ProdsinStore= React.lazy(() => import('./components/reports/products_in_store'));
+const Sale= React.lazy(() => import('./components/sales/sales'));
+const Cart = React.lazy(() => import('./components/cart/cart'));
+
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
@@ -57,6 +62,10 @@ const routes = [
   { path: '/categories',  exact: true,  name:'Categories',component:Categories},
   { path: '/subcategory',  exact: true,  name:'Sub-Categories',component:Subcategories},
   { path: '/addproduct',  exact: true,  name:'Add Product',component:Addproduct},
+  { path: '/supplies',  exact: true,  name:'Add Supply',component:Supplies},
+  { path:'/productsstore', exact:true, name:'Products in Store', component:ProdsinStore},
+  { path:'/sale', exact:true, name:'Sale', component:Sale},
+  { path:'/cart', exact:true, name:'Cart', component:Cart},
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

@@ -10,6 +10,13 @@ export default [
     _tag: 'CSidebarNavTitle',
     _children: ['Products']
   },
+
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Sale',
+    to: '/sale',
+    icon: 'cil-drop',
+  },
   {
     _tag: 'CSidebarNavItem',
     name: 'Add Products',
@@ -86,13 +93,7 @@ export default [
   {
     _tag: 'CSidebarNavItem',
     name: 'Add Supplies',
-    to: '/theme/colors',
-    icon: 'cil-drop',
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Modify Supplies',
-    to: '/theme/colors',
+    to: '/supplies',
     icon: 'cil-drop',
   },
   {
@@ -108,7 +109,7 @@ export default [
   {
     _tag: 'CSidebarNavItem',
     name: 'Goods in Store',
-    to: '/theme/colors',
+    to: '/productsstore',
     icon: 'cil-drop',
   },
   {

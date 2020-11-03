@@ -5,6 +5,9 @@ import usersReducer from './reducers/user'
 import suppliersReducer from './reducers/suppliers'
 import bikesReducer from './reducers/bikes'
 import productsReducer from './reducers/products'
+import suppliesReducer from './reducers/supplies'
+import storeProductsReducer from './reducers/partsStore'
+import addToCartReducer from './reducers/cart'
 
 const allReducers=combineReducers(
     {
@@ -13,7 +16,10 @@ const allReducers=combineReducers(
         users:usersReducer,
         suppliers:suppliersReducer,
         bikes:bikesReducer,
-        products:productsReducer
+        products:productsReducer,
+        supplies:suppliesReducer,
+        store:storeProductsReducer,
+        cart:addToCartReducer
 }
 );
 export default allReducers; 

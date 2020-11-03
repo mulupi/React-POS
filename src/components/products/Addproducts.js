@@ -14,7 +14,8 @@ import {
   CFormGroup,
   CButton,
   CPagination,
-  CTextarea
+  CTextarea,
+  CInputFile
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -45,10 +46,11 @@ const AddProduct = () => {
   const token = useSelector(state => state.auth.access_token)
   const show = useSelector(state => state.dashboard.sidebarShow)
   const CategoriesData = useSelector(state => state.products.product_categories_data)
-  const categoriesRegistrationSuccess=useSelector(state=>state.products.product_category_registration_success)
-  const createProductError = useSelector(state => state.products.product_category_registration_error)
+  const productRegistrationSuccess=useSelector(state=>state.products.product_registration_success)
+  const createProductError = useSelector(state => state.products.product_registration_error)
   const ModelsData = useSelector(state => state.bikes.models_data)
   const ProductsData = useSelector(state => state.products.product_data)
+  const SubCategoriesData = useSelector(state => state.products.product_subcategory_data)
 
   const history = useHistory()
   const queryPage = useLocation().search.match(/page=([0-9]+)/, '')
@@ -62,6 +64,8 @@ const AddProduct = () => {
   const [description,setDescription]=useState("")
   const [category, setCategoryname]=useState(0)
   const [models,setModel]=useState([])
+  const [subcategory, setSubCategoryname]=useState(0)
+  const [file_upload, setFile] = useState(undefined);
 
   const [product_name, setProduct_name] = useState("");
   const dispatch = useDispatch();
@@ -75,7 +79,9 @@ const AddProduct = () => {
       "models":x,
       "description":description,
       "manufacturer":manufacturer,
-      "category":category
+      "category":category,
+      "subcategory":subcategory,
+      "image":file_upload
     }
       if (jwt_decode(token)["role"]==="Manager"){
       await dispatch(CreateProduct(token,product))
@@ -132,7 +138,7 @@ const AddProduct = () => {
     ); 
 
     useEffect(() => {
-      if(categoriesRegistrationSuccess === true){
+      if(productRegistrationSuccess === true){
         showSuccessSnackBar()
         dispatch(clearErrors())
       }
@@ -142,7 +148,7 @@ const AddProduct = () => {
         }
         }
         users()
-    },[categoriesRegistrationSuccess]
+    },[productRegistrationSuccess]
       ); 
 
   return (
@@ -221,7 +227,27 @@ const AddProduct = () => {
                   />                
                 </CTooltip>
                 </CCol>
-              </CFormGroup>             
+              </CFormGroup>    
+
+              <CFormGroup row>
+                <CLabel htmlFor="Sub-Category" col md={4}>Sub-Category</CLabel>
+                <CCol xs="12" md="8">
+                <CTooltip
+                    content={`Select a Category`}
+                    placement={'bottom'}
+                  >
+                <Autocomplete
+                    id="Sub-Category"
+                    options={SubCategoriesData}
+                    getOptionLabel={(option) => option.title}
+                    onChange={(event, newValue) => {
+                      setSubCategoryname(newValue.id);
+                    }}
+                    renderInput={(params) => <TextField {...params} label="Sub-Category" variant="outlined" />}
+                  />                
+                </CTooltip>
+                </CCol>
+              </CFormGroup>         
               
               <CFormGroup row>
                 <CLabel htmlFor="models" col md={4}>Models</CLabel>
@@ -253,6 +279,22 @@ const AddProduct = () => {
                 </CTooltip>
                 </CCol>
               </CFormGroup>    
+
+              <CFormGroup row>
+                  <CLabel col md={4}>Image</CLabel>
+                  <CCol xs="12" md="8">
+                  <CTooltip
+                    content={`This is the image of the product`}
+                    placement={'bottom'}
+                  >
+                    <CInputFile custom id="image" onChange={(e)=>{setFile(e.target.files[0])}}/>
+                    </CTooltip>
+                    <CLabel htmlFor="image" variant="custom-file">
+                      Choose file...
+                    </CLabel>
+                  </CCol>
+                </CFormGroup>    
+
                 <CFormGroup row>
                 <CCol xs="4">
                 <CButton  type="submit"  color="primary"><CIcon name="cil-user" /> Create Category</CButton> 
@@ -283,13 +325,13 @@ const AddProduct = () => {
             itemsPerPage={5}
             activePage={page}
             clickableRows
-            onRowClick={(item) => history.push(`/category/${item.id}`)}
+            onRowClick={(item) => history.push(`/addproduct/${item.id}`)}
             
           />
           <CPagination
             activePage={page}
             onActivePageChange={pageChange}
-            pages={Math.ceil(CategoriesData.length/5)}
+            pages={Math.ceil(ProductsData.length/5)}
             doubleArrows={true} 
             align="center"
           />
