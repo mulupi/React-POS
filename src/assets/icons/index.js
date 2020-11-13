@@ -1,6 +1,8 @@
 import { sygnet } from './sygnet'
 import { logo } from './logo'
 import { logoNegative } from './logo-negative'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 import {
   cibSkype,
@@ -127,14 +129,22 @@ import {
   cilUserUnfollow,
   cilX,
   cilXCircle,
-  cilWarning
+  cilWarning,
+  cibSalesforce,
+  cibAddthis,
+  cilBook
 } from '@coreui/icons'
+
+
 
 export const icons = Object.assign({}, {
   sygnet,
   logo,
   logoNegative
 }, {
+  cilBook,
+  cibAddthis,
+  cibSalesforce,
   cilAlignCenter,
   cilAlignLeft,
   cilAlignRight,

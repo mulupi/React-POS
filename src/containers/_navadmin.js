@@ -4,7 +4,7 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Dashbodard',
     to: '/dashboard',
-    icon: 'cil-home'
+    icon: 'cilHome'
   },  
   {
     _tag: 'CSidebarNavTitle',
@@ -15,13 +15,13 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Sale',
     to: '/sale',
-    icon: 'cil-drop',
+    icon: 'sygnet',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Add Products',
     to: '/addproduct',
-    icon: 'cil-drop',
+    icon: 'cibAddthis',
   },
   {
     _tag: 'CSidebarNavDropdown',
@@ -78,13 +78,13 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Add Supplier',
     to: '/suppliers',
-    icon: 'cil-drop',
+    icon: 'cibAddthis',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Modify Suppliers',
     to: '/theme/colors',
-    icon: 'cil-drop',
+    icon: 'cil-pencil',
   },
   {
     _tag: 'CSidebarNavTitle',
@@ -94,7 +94,7 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Add Supplies',
     to: '/supplies',
-    icon: 'cil-drop',
+    icon: 'cibAddthis',
   },
   {
     _tag: 'CSidebarNavTitle',
@@ -104,25 +104,25 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Suppliers',
     to: '/theme/colors',
-    icon: 'cil-drop',
+    icon: 'cilBook',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Goods in Store',
     to: '/productsstore',
-    icon: 'cil-drop',
+    icon: 'cilBook',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Goods in Shelves',
     to: '/theme/colors',
-    icon: 'cil-drop',
+    icon: 'cilBook',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Sales',
     to: '/theme/colors',
-    icon: 'cil-drop',
+    icon: 'cilBook',
   }
   /*
   {
