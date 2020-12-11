@@ -22,7 +22,7 @@ import routes from '../routes'
 import { 
   TheHeaderDropdown,
   TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif
+  Cart
 }  from './index'
 import jwt_decode from "jwt-decode";
 
@@ -76,7 +76,7 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif/>
+        <Cart/>
         <TheHeaderDropdownMssg/>
         <TheHeaderDropdown/>
       </CHeaderNav>

@@ -1,32 +1,34 @@
 import {
     ADD_TO_CART,
+    REMOVE_FROM_CART,
     CLEAR_CART
 } from '../actions/actionTypes'
 
 const initialState = {
     items: []
   };
-
+let new_cart=[]
 export default function addToCartReducer(state = initialState, action){
     switch(action.type)
     {
         case ADD_TO_CART:
-            let x=false
-            state["items"].map((i)=>{
-                if(i.id===action.payload.id){
-                    x=true
-                    i.quantity_sold=parseInt(i.quantity_sold,10)+parseInt(action.payload.quantity_sold,10)
-                    return{
-                        ...state
-                    }
-                }
-            })
-            if(!x){
-                state["items"].push(action.payload)
                 return {
-                    ...state,                
-                };
-
+                    ...state,
+                    items:action.payload
+                }
+        case REMOVE_FROM_CART:
+            new_cart=state["items"].filter(()=>true)
+            for (let i=0;i<new_cart.length;i++)
+            {
+                if(new_cart[i].key===parseInt(action.payload))
+                {
+                    new_cart.splice(i, 1)
+                    break
+                }
+            }
+            return{
+                ...state,
+                items:new_cart
             }
             
         case CLEAR_CART:

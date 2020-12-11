@@ -19,6 +19,10 @@ export const getallProductsinStore =  (access_token) => (dispatch) => {
         axios
         .get(PARTS_STORE, config)
         .then((res) =>{
+            res.data.data.map((item)=>{
+                item["key"]=parseInt(" "+item["product_code"]+item["supply"])
+            })
+            
             dispatch({
             type: GET_ALL_PRODUCTSIN_STORE,
             payload: res.data.data,
@@ -37,8 +41,8 @@ export const getallProductsinStore =  (access_token) => (dispatch) => {
             });}
         });
     };
-    export const clearErrors=()=>(dispatch)=>{
-    dispatch({
-        type: CLEAR_ALL_PRODUCTSIN_STORE_ERROR
-    })
-    }
+export const clearErrors=()=>(dispatch)=>{
+dispatch({
+    type: CLEAR_ALL_PRODUCTSIN_STORE_ERROR
+})
+}

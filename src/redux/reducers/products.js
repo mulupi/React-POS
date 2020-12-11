@@ -14,7 +14,7 @@ import {
     CREATE_PRODUCT_SUB_CAT_SUCCESS,
     CREATE_PRODUCT_SUB_CAT_ERROR,
     GET_ALL_PRODUCT_SUB_CAT,
-    GET_ALL_PRODUCT_SUB_CAT_ERROR,
+    GET_ALL_PRODUCT_SUB_CAT_ERROR, 
 
     } from '../actions/actionTypes'
 
@@ -106,7 +106,7 @@ export default function productsReducer(state = initialState, action){
                 ...state,
                 product_subcategory_error:true
 
-            };
+            };  
 
         case CLEAR_GET_ALL_PRODUCTS:
             return{
